@@ -58,6 +58,7 @@ class DIDMacro():
     def startBtn(self):
         # mc.run(chrome_path=self.chrome_path, url_list=self.url_list)
         t = Thread(target=mc.run, args=(self.chrome_path+CHROME, self.url_list, self.minute))
+        t.daemon = True
         t.start()
 
     def addBtn(self):
