@@ -62,7 +62,7 @@ class DIDMacro():
 
     def addBtn(self):
         if str(self.cPath_textbox.get("1.0", "end-1c"))!="":
-            self.chrome_path = str(self.cPath_textbox.get("1.0", "end-1c")) + CHROME
+            self.chrome_path = str(self.cPath_textbox.get("1.0", "end-1c"))
 
         if str(self.min_textbox.get("1.0", "end-1c"))!="":
             self.minute = int(self.min_textbox.get("1.0", "end-1c"))
