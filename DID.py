@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import Button
 from tkinter import Label
 from tkinter import Text
+from threading import Thread
 
 import macro as mc
 
@@ -43,7 +44,9 @@ class DIDMacro():
 
     # tkinter event
     def startBtn(self):
-        mc.run(chrome_path=self.chrome_path, url_list=self.url_list)
+        # mc.run(chrome_path=self.chrome_path, url_list=self.url_list)
+        t = Thread(target=mc.run, args=(self.chrome_path, self.url_list))
+        t.start()
 
     def addBtn(self):
         if str(self.cPath_textbox.get("1.0", "end-1c"))!="":
