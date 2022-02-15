@@ -18,8 +18,8 @@ def close_url():
     press('f11')
     hotkey('ctrl', 'w')
 
-def run(chrome_path, url_list):
+def run(chrome_path, url_list, minute=5):
     for url in url_list:
         open_url(chrome_path=chrome_path, url=url)
-        sleep(60*5)
+        sleep(60*int(minute))
         close_url()
