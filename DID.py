@@ -56,10 +56,13 @@ class DIDMacro():
 
     # tkinter event
     def startBtn(self):
+        mc.TERMINATE = False
+        self.start_btn['state'] = tk.DISABLED
+        self.add_btn['state'] = tk.DISABLED
+
         # mc.run(chrome_path=self.chrome_path, url_list=self.url_list)
-        t = Thread(target=mc.run, args=(self.chrome_path+CHROME, self.url_list, self.minute))
-        t.daemon = True
-        t.start()
+        self.t = Thread(target=mc.run, args=(self.chrome_path+CHROME, self.url_list, self.minute), daemon=True)
+        self.t.start()
 
     def addBtn(self):
         if str(self.cPath_textbox.get("1.0", "end-1c"))!="":
@@ -72,6 +75,7 @@ class DIDMacro():
             self.url_list.append(str(self.url_textbox.get("1.0", "end-1c")))
             self.url_textbox.delete("1.0", "end")
             self.start_btn['state'] = tk.ACTIVE
+            self.start = True
 
     def resetBtn(self):
         self.cPath_textbox.delete("1.0", "end")
@@ -86,6 +90,10 @@ class DIDMacro():
         self.min_textbox.insert(tk.END, self.minute)
 
         self.start_btn['state'] = tk.DISABLED
+        self.add_btn['state'] = tk.ACTIVE
+
+        mc.TERMINATE = True
+        self.t.join()
 
 if __name__ == "__main__":
     start = DIDMacro()
