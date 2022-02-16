@@ -4,6 +4,7 @@ import pyautogui
 from time import sleep
 
 pyautogui.FAILSAFE = False
+TERMINATE = False
 
 def open_url(chrome_path, url):
     get(chrome_path).open(url)
@@ -19,7 +20,12 @@ def close_url():
     hotkey('ctrl', 'w')
 
 def run(chrome_path, url_list, minute=5):
-    for url in url_list:
-        open_url(chrome_path=chrome_path, url=url)
-        sleep(60*int(minute))
-        close_url()
+    while not TERMINATE:
+        for url in url_list:
+            open_url(chrome_path=chrome_path, url=url)
+            for i in range(60*int(minute)):
+                if TERMINATE:
+                    break
+                sleep(1)
+            if not TERMINATE:
+                close_url()
